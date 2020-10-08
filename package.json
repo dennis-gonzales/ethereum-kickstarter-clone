@@ -1,0 +1,28 @@
+{
+  "name": "kickstarter",
+  "version": "1.0.0",
+  "description": "A kickstarter clone",
+  "main": "compile.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennis-gonzales/ethereum-kickstarter-clone.git"
+  },
+  "keywords": [
+    "Solidity",
+    "Ethereum",
+    "Blockchain",
+    "Smartcontracts"
+  ],
+  "author": "Dennis Gonzales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dennis-gonzales/ethereum-kickstarter-clone/issues"
+  },
+  "homepage": "https://github.com/dennis-gonzales/ethereum-kickstarter-clone#readme",
+  "dependencies": {
+    "solc": "^0.4.17"
+  }
+}

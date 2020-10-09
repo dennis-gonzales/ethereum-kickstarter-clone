@@ -121,7 +121,7 @@ describe('Campaigns', () => {
 
         const request = await campaign.methods.requests(0).call();
         // TODO: get the boolean value(Approved if true) from the approvals mapping
-        // const isApproved = await request.approvals[accounts[1]];
+        // const isApproved = await request.approvals[accounts[1]]; // assert that it is approved
 
         assert.strictEqual('1', request.approvalCount);
 
@@ -137,7 +137,7 @@ describe('Campaigns', () => {
         // get the difference of the new and old balance to determine how much ether has sent
         const difference = web3.utils.fromWei(newRecipientBalance, 'ether') - web3.utils.fromWei(oldRecipientBalance, 'ether');
 
-        // assert that the difference is greater that the sent ether diminished by 1(for gas)
+        // assert that the difference is greater that the sent ether diminished by 1(allocated for gas)
         assert(parseFloat(difference) > '4');
     });
 });

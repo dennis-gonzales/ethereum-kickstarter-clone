@@ -3,12 +3,12 @@ pragma solidity ^0.4.17;
 contract CampaignFactory {
     address[] public campaignsAddresses;
 
-    function CreateCampaign(uint minimumContribution) public {
+    function createCampaign(uint minimumContribution) public {
         address campaign = new Campaign(minimumContribution, msg.sender);
         campaignsAddresses.push(campaign);
     }
 
-    function GetCampaignsAddresses() public view returns(address[]) {
+    function getCampaignsAddresses() public view returns(address[]) {
         return campaignsAddresses;
     }
 }

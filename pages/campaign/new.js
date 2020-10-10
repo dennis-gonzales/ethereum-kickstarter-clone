@@ -33,7 +33,7 @@ class NewCampaign extends Component {
             <Layout>
                 <h3>Create your own campaign</h3>
 
-                <Form error={this.state.errorMessage !== '' ? true : false} onSubmit={this.onSubmit}>
+                <Form error={this.state.errorMessage !== ''} onSubmit={this.onSubmit}>
                     <Form.Field>
                         <div className="ui action input">
                             <Button content='Save Campaign' labelPosition='right'

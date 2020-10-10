@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
+import { Card, Button } from 'semantic-ui-react'
 import factory from '../ethereum/factory';
 import web3 from '../ethereum/web3';
-import useSWR from 'swr';
+import Layout from '../components/Layout';
 
 class HomePage extends Component {
 
+    state = {
+        accounts: []
+    };
+
     componentDidMount = async () => {
-        // console.log('componentDidMount');
-        // const accounts = await web3.eth.getAccounts();
-        // console.log(accounts);
-        // this.setState({ accounts });
+        const accounts = await web3.eth.getAccounts();
+        this.setState({ accounts });
     }
 
-    render() {        
+    render = () => {
         return (
-            <div>
-                <h2>Hello World</h2>
-                <p>Factory Contract Addresses: {this.props.factoryContractAddress}</p>
-                <p>Campaign Addresses: {this.props.campaignAddresses[0]}</p>
-                <p>Account [0]: {this.props.accounts}</p>
-            </div>
+            <Layout>
+                <div>
+                    <h2>Hello World</h2>
+                    <p>Factory Contract Addresses: {this.props.factoryContractAddress}</p>
+                    <p>Campaign Addresses: {this.props.campaignAddresses[0]}</p>
+                    <p>Account [0]: {this.state.accounts[0]}</p>
+                </div>
+            </Layout>
         );
     }
 }
@@ -37,9 +42,5 @@ export const getServerSideProps = async () => {
         },
     }
 }
-
-// export function Profile() {
-  
-// }
 
 export default HomePage;

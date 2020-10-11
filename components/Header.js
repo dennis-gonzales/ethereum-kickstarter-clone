@@ -1,48 +1,31 @@
+import { Link } from '../routes';
 import react, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
 
 class Header extends Component {
 
     menus = [
-        { id: 'menu-home', value: 'Home' },
-        { id: 'menu-campaigns', value: 'Campaigns' },
-        { id: 'menu-create-campaign', value: '+' },
+        { id: 'menu-home', value: 'Home', route: '/' },
+        { id: 'menu-campaigns', value: 'Campaigns', route: '/campaigns' },
+        { id: 'menu-create-campaign', value: '+', route: '/campaigns/create' },
     ];
 
-    state = {
-        activeItem: this.menus[0].id
-     };
-
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name });
-    }
-
     render = () => {
-        const { activeItem } = this.state;
-        
         return (
             <div>
-                <Menu pointing>
-                    <Menu.Item
-                        content={this.menus[0].value}
-                        name={this.menus[0].id}
-                        active={activeItem === this.menus[0].id}
-                        onClick={this.handleItemClick}
-                    />
+                <Menu pointing style={{ marginTop: '10px' }}>
+                    <Link route={this.menus[0].route}>
+                        <a className='item'>{this.menus[0].value}</a>
+                    </Link>
                     
                     <Menu.Menu position='right'>
-                        <Menu.Item
-                            content={this.menus[1].value}
-                            name={this.menus[1].id}
-                            active={activeItem === this.menus[1].id}
-                            onClick={this.handleItemClick}
-                        />
-                        <Menu.Item
-                            content={this.menus[2].value}
-                            name={this.menus[2].id}
-                            active={activeItem === this.menus[2].id}
-                            onClick={this.handleItemClick}
-                        />
+                        <Link route={this.menus[1].route}>
+                            <a className='item'>{this.menus[1].value}</a>
+                        </Link>
+
+                        <Link route={this.menus[2].route}>
+                            <a className='item'>{this.menus[2].value}</a>
+                        </Link>
                     </Menu.Menu>
                 </Menu>
             </div>

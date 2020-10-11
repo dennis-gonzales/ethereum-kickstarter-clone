@@ -1,64 +1,90 @@
+import { Router } from '../../routes';
 import React, { Component } from 'react';
-import { Form, Button, Input, Message } from 'semantic-ui-react';
+import { Form, Button, Input, Message, Icon } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 
-class NewCampaign extends Component {
+class CreateCampaign extends Component {
 
     state = {
-        minimumContribution: '0',
-        errorMessage: '',
-        loading: false
+        minimumContribution: 0,
+        loading: false,
+        success: false,
+        error: false,
+        errorMessage: ''
     };
 
     onSubmit = async (event) => {
+        const { minimumContribution } = this.state
         
         this.setState({ loading: true });
 
         try {
             const accounts = await web3.eth.getAccounts();
-            await factory.methods.createCampaign(this.state.minimumContribution)
+            await factory.methods.createCampaign(minimumContribution)
                 .send({ from: accounts[0] });
 
+            this.setState({ success: true });
+
         } catch (err) {
-            this.setState({ errorMessage: err.message });
+            this.setState({ error: true, errorMessage: err.message });
         }
 
         this.setState({ loading: false });
     }
 
     saveValueOnChange = (event) => {
-        this.setState({ minimumContribution: event.target.value, errorMessage: '' });
+        this.setState({ 
+            minimumContribution: event.target.value,
+            error: false,
+            errorMessage: ''
+        });
     }
 
     render = () => {
+        const { loading, success, error, minimumContribution } = this.state
+
         return(
             <Layout>
                 <h3>Create your own campaign</h3>
 
-                <Form loading={this.state.loading} error={this.state.errorMessage !== ''} onSubmit={this.onSubmit}>
+                <Form onSubmit={this.onSubmit}
+                    loading={loading}
+                    success={success}
+                    error={error}>
+
                     <Form.Field>
                         <div className="ui action input">
                             <Button content='Save Campaign' labelPosition='right'
                                 color='black' icon='ethereum' />
                                 
-                            <Input type="number" min={1} value={this.state.minimumContribution}
+                            <Input type="number" min={1} value={minimumContribution}
                                 onChange={event => this.saveValueOnChange(event) }
                                 label={{ basic: true, content: 'Wei' }} labelPosition='right'
                                 placeholder="Minimum contribution in Wei"
-                                error={this.state.errorMessage !== ''} />
+                                error={error} />
                         </div>
                     </Form.Field>
+
+                    <Message
+                        success
+                        icon='check circle outline'
+                        header='Transaction completed'
+                        content='Creation of the campaign is successful!'
+                    />
+
                     <Message
                         error
+                        icon='remove'
                         header='Hold your horses!'
                         content={this.state.errorMessage}
                     />
+
                 </Form>
             </Layout>
         );
     }
 }
 
-export default NewCampaign;
+export default CreateCampaign;

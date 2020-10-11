@@ -5,12 +5,10 @@ import Header from './Header';
 
 const Layout = (props) => {
     return (
-        <div>
+        <Container>
             <Header />
-            <Container>
-                {props.children}
-            </Container>
-        </div>
+            {props.children}
+        </Container>
     );
 };
 

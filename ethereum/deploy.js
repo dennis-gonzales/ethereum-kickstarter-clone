@@ -2,9 +2,6 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 const { interface, bytecode } = require('./build/CampaignFactory.json');
 
-console.log(interface);
-console.log(bytecode);
-
 const provider = new HDWalletProvider(
     'mouse indoor tragic ridge broom small accident prison ridge midnight indoor body',
     'https://rinkeby.infura.io/v3/109705d448d6470792529a46e8e40e28'

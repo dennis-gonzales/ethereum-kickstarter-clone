@@ -8,11 +8,13 @@ class NewCampaign extends Component {
 
     state = {
         minimumContribution: '0',
-        errorMessage: ''
+        errorMessage: '',
+        loading: false
     };
 
     onSubmit = async (event) => {
-        console.log('Hello World!');
+        
+        this.setState({ loading: true });
 
         try {
             const accounts = await web3.eth.getAccounts();
@@ -22,6 +24,8 @@ class NewCampaign extends Component {
         } catch (err) {
             this.setState({ errorMessage: err.message });
         }
+
+        this.setState({ loading: false });
     }
 
     saveValueOnChange = (event) => {
@@ -33,7 +37,7 @@ class NewCampaign extends Component {
             <Layout>
                 <h3>Create your own campaign</h3>
 
-                <Form error={this.state.errorMessage !== ''} onSubmit={this.onSubmit}>
+                <Form loading={this.state.loading} error={this.state.errorMessage !== ''} onSubmit={this.onSubmit}>
                     <Form.Field>
                         <div className="ui action input">
                             <Button content='Save Campaign' labelPosition='right'
@@ -42,7 +46,8 @@ class NewCampaign extends Component {
                             <Input type="number" min={1} value={this.state.minimumContribution}
                                 onChange={event => this.saveValueOnChange(event) }
                                 label={{ basic: true, content: 'Wei' }} labelPosition='right'
-                                placeholder="Minimum contribution in Wei" />
+                                placeholder="Minimum contribution in Wei"
+                                error={this.state.errorMessage !== ''} />
                         </div>
                     </Form.Field>
                     <Message

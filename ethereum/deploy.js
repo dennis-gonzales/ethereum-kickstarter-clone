@@ -4,7 +4,7 @@ const { interface, bytecode } = require('./build/CampaignFactory.json');
 
 const provider = new HDWalletProvider(
     'mouse indoor tragic ridge broom small accident prison ridge midnight indoor body',
-    'https://rinkeby.infura.io/v3/109705d448d6470792529a46e8e40e28'
+    'https://rinkeby.infura.io/v3/f458482a8a4b4067b6632de99e52dc3d'
 );
 
 const web3 = new Web3(provider);

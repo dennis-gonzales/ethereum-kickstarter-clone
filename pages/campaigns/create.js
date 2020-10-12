@@ -1,6 +1,6 @@
 import { Router } from '../../routes';
 import React, { Component } from 'react';
-import { Form, Button, Input, Message, Icon } from 'semantic-ui-react';
+import { Form, Button, Input, Message } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
@@ -16,7 +16,7 @@ class CreateCampaign extends Component {
     };
 
     onSubmit = async (event) => {
-        const { minimumContribution } = this.state
+        const { minimumContribution } = this.state;
         
         this.setState({ loading: true });
 
@@ -43,7 +43,7 @@ class CreateCampaign extends Component {
     }
 
     render = () => {
-        const { loading, success, error, minimumContribution } = this.state
+        const { loading, success, error, minimumContribution } = this.state;
 
         return(
             <Layout>
@@ -71,15 +71,13 @@ class CreateCampaign extends Component {
                         success
                         icon='check circle outline'
                         header='Transaction completed'
-                        content='Creation of the campaign is successful!'
-                    />
+                        content='Creation of the campaign is successful!' />
 
                     <Message
                         error
                         icon='remove'
                         header='Hold your horses!'
-                        content={this.state.errorMessage}
-                    />
+                        content={this.state.errorMessage} />
 
                 </Form>
             </Layout>

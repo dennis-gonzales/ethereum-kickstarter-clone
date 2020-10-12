@@ -32,13 +32,11 @@ class HomePage extends Component {
 export const getServerSideProps = async () => {
     const factoryContractAddress = await factory._address;
     const campaignAddresses = await factory.methods.getCampaignsAddresses().call();
-    const accounts = await web3.eth.getAccounts();
 
     return {
         props: {
             campaignAddresses,
-            factoryContractAddress,
-            accounts
+            factoryContractAddress
         },
     }
 }

@@ -10,4 +10,9 @@ module.exports = routes()
         name: 'campaign-details',
         pattern: '/campaign/:address',
         page: '/campaigns/details'
+    })
+    .add({
+        name: 'campaign-spending-requests',
+        pattern: '/campaign/:address/requests',
+        page: '/campaigns/requests/index'
     });

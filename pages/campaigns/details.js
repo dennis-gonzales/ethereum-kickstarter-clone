@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Grid, Card, Message } from 'semantic-ui-react';
+import { Grid, Card, Message, Button, Icon } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
 import Contribute from '../../components/Contribute';
+import { Link } from '../../routes';
 
 class CampaignDetails extends Component {
 
@@ -54,16 +55,32 @@ class CampaignDetails extends Component {
 
         return(
             <Layout>
-                <h1>Campaign Details</h1>
-                
-                <Grid>
-                    <Grid.Column largeScreen={10} mobile={16}>
-                        <Card.Group itemsPerRow={2} items={errorMessage ? [] : summary} />
-                    </Grid.Column>
+                <Grid centered>
+                    <Grid.Row>
+                        <h1>Campaign Details</h1>
+                    </Grid.Row>
 
-                    <Grid.Column largeScreen={6} mobile={16}>
-                        <Contribute campaignAddress={campaignAddress} />
-                    </Grid.Column>
+                    <Grid.Row>
+                        <Grid.Column largeScreen={10} mobile={16}>
+                            <Card.Group itemsPerRow={2} items={errorMessage ? [] : summary} />
+
+                            <Link className='center' route='campaign-spending-requests' params={{ address: campaignAddress }}>
+                                <a>
+                                    <Button primary animated>
+                                        <Button.Content visible>View Spending Requests</Button.Content>
+                                        <Button.Content hidden>
+                                            <Icon name='arrow right' />
+                                        </Button.Content>
+                                    </Button>
+                                </a>
+                            </Link>
+
+                        </Grid.Column>
+
+                        <Grid.Column largeScreen={6} mobile={16}>
+                            <Contribute campaignAddress={campaignAddress} />
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
 
                 <Message icon='remove'

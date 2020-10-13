@@ -24,23 +24,28 @@ class IndexCampaign extends Component {
 
         return (
             <Layout>
-                <h1>All the Campaigns will show up here!</h1>
+                <Grid centered>
+                    <Grid.Row>
+                        <h1>Campaigns with greate Ideas!</h1>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column floated='right' width={3}>
+                            <Link route='campaign-create'>
+                                <a>
+                                    <Button primary icon='add'
+                                        content='Create Campaign' />
+                                </a>
+                            </Link>
+                        </Grid.Column>
+                    </Grid.Row>
 
-                <Grid>
-                    <Grid.Column floated='right' width={3}>
-                        <Link route='campaign-create'>
-                            <a>
-                                <Button primary icon='add'
-                                content='Create Campaign' />
-                            </a>
-                        </Link>
-                    </Grid.Column>
-
-                    <Grid.Column width={16}>
-                        <Card.Group
-                            itemsPerRow={2}
-                            items={campaigns} />
-                    </Grid.Column>
+                    <Grid.Row>
+                        <Grid.Column width={16}>
+                            <Card.Group
+                                itemsPerRow={2}
+                                items={campaigns} />
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
             </Layout>
         );

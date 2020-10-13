@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react';
 import factory from '../ethereum/factory';
 import web3 from '../ethereum/web3';
 import Layout from '../components/Layout';

@@ -1,6 +1,6 @@
 import { Link } from '../../routes';
 import React, { Component } from 'react';
-import { Card, Button } from 'semantic-ui-react';
+import { Grid, Card, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import factory from '../../ethereum/factory';
 
@@ -26,18 +26,22 @@ class IndexCampaign extends Component {
             <Layout>
                 <h1>All the Campaigns will show up here!</h1>
 
-                <Link route='campaign-create'>
-                    <a><Button primary
-                        content='Create Campaign'
-                        floated='right'
-                        icon='add'
-                    /></a>
-                </Link>
+                <Grid>
+                    <Grid.Column floated='right' width={3}>
+                        <Link route='campaign-create'>
+                            <a>
+                                <Button primary icon='add'
+                                content='Create Campaign' />
+                            </a>
+                        </Link>
+                    </Grid.Column>
 
-                <Card.Group centered
-                itemsPerRow={1} 
-                items={campaigns} />
-
+                    <Grid.Column width={16}>
+                        <Card.Group
+                            itemsPerRow={2}
+                            items={campaigns} />
+                    </Grid.Column>
+                </Grid>
             </Layout>
         );
     }

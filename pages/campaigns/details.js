@@ -14,9 +14,14 @@ class CampaignDetails extends Component {
             requestsCount,
             approversCount,
             manager,
+            campaignAddress,
             errorMessage
 
         } = this.props;
+
+        if (!web3.utils.isAddress(manager)) {
+            return ('Redirecting to previous page.');
+        }
 
         const summary = [
             {
@@ -52,12 +57,12 @@ class CampaignDetails extends Component {
                 <h1>Campaign Details</h1>
                 
                 <Grid>
-                    <Grid.Column stretched={false} largeScreen={10} mobile={16}>
+                    <Grid.Column largeScreen={10} mobile={16}>
                         <Card.Group itemsPerRow={2} items={errorMessage ? [] : summary} />
                     </Grid.Column>
 
                     <Grid.Column largeScreen={6} mobile={16}>
-                        <Contribute />
+                        <Contribute campaignAddress={campaignAddress} />
                     </Grid.Column>
                 </Grid>
 
@@ -71,32 +76,26 @@ class CampaignDetails extends Component {
 }
 
 export const getServerSideProps = async (context) => {
-    const address = context.query.address;
+    const campaignAddress = context.query.address;
+    const campaign = Campaign(campaignAddress);
 
-    if (web3.utils.isAddress(address)) {
-        const campaign = Campaign(address);
-        
-        try {
-            const summary = await campaign.methods.getSummary().call();
+    try {
+        const summary = await campaign.methods.getSummary().call();
 
-            return {
-                props: {
-                    minimumContribution: summary[0],
-                    balance: summary[1],
-                    requestsCount: summary[2],
-                    approversCount: summary[3],
-                    manager: summary[4]
-                },
-            }
-        } catch(err) {
-            console.error(err);
-        }
-
-        
-    } else {
         return {
             props: {
-                errorMessage: 'You shouldn\'t be here!\nAre you being redicted? report the issue at pro.gonzalesdennis@gmail.com'
+                campaignAddress: campaignAddress,
+                minimumContribution: summary[0],
+                balance: summary[1],
+                requestsCount: summary[2],
+                approversCount: summary[3],
+                manager: summary[4]
+            },
+        }
+    } catch (err) {
+        return {
+            props: {
+                errorMessage: err.message
             },
         }
     }

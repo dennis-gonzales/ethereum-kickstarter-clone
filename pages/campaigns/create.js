@@ -18,14 +18,14 @@ class CreateCampaign extends Component {
     onSubmit = async (event) => {
         const { minimumContribution } = this.state;
         
-        this.setState({ loading: true });
+        this.setState({ loading: true, error: false });
 
         try {
             const accounts = await web3.eth.getAccounts();
             await factory.methods.createCampaign(minimumContribution)
                 .send({ from: accounts[0] });
 
-            this.setState({ success: true });
+            this.setState({ success: true, minimumContribution: 0 });
 
         } catch (err) {
             this.setState({ error: true, errorMessage: err.message });

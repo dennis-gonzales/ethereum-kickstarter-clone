@@ -56,6 +56,8 @@ class CampaignDetails extends Component {
         return(
             <Layout>
                 <Grid centered>
+                    <Grid.Row></Grid.Row>
+                    
                     <Grid.Row>
                         <h1>Campaign Details</h1>
                     </Grid.Row>
@@ -63,23 +65,24 @@ class CampaignDetails extends Component {
                     <Grid.Row>
                         <Grid.Column largeScreen={10} mobile={16}>
                             <Card.Group itemsPerRow={2} items={errorMessage ? [] : summary} />
-
-                            <Link className='center' route='campaign-spending-requests' params={{ address: campaignAddress }}>
-                                <a>
-                                    <Button primary animated>
-                                        <Button.Content visible>View Spending Requests</Button.Content>
-                                        <Button.Content hidden>
-                                            <Icon name='arrow right' />
-                                        </Button.Content>
-                                    </Button>
-                                </a>
-                            </Link>
-
                         </Grid.Column>
 
                         <Grid.Column largeScreen={6} mobile={16}>
                             <Contribute campaignAddress={campaignAddress} />
                         </Grid.Column>
+                    </Grid.Row>
+
+                    <Grid.Row>
+                        <Link className='center' route='campaign-spending-requests' params={{ address: campaignAddress }}>
+                            <a>
+                                <Button primary animated>
+                                    <Button.Content visible>VIEW CAMPAIGN EXPENSES</Button.Content>
+                                    <Button.Content hidden>
+                                        <Icon name='arrow right' />
+                                    </Button.Content>
+                                </Button>
+                            </a>
+                        </Link>
                     </Grid.Row>
                 </Grid>
 
@@ -93,15 +96,15 @@ class CampaignDetails extends Component {
 }
 
 export const getServerSideProps = async (context) => {
-    const campaignAddress = context.query.address;
-    const campaign = Campaign(campaignAddress);
+    const { address } = context.query;
+    const campaign = Campaign(address);
 
     try {
         const summary = await campaign.methods.getSummary().call();
 
         return {
             props: {
-                campaignAddress: campaignAddress,
+                campaignAddress: address,
                 minimumContribution: summary[0],
                 balance: summary[1],
                 requestsCount: summary[2],

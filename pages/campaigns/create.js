@@ -18,7 +18,7 @@ class CreateCampaign extends Component {
     onSubmit = async (event) => {
         const { minimumContribution } = this.state;
         
-        this.setState({ loading: true, error: false });
+        this.setState({ loading: true, error: false, errorMessage: '' });
 
         try {
             const accounts = await web3.eth.getAccounts();
@@ -43,7 +43,7 @@ class CreateCampaign extends Component {
     }
 
     render = () => {
-        const { loading, success, error, minimumContribution } = this.state;
+        const { loading, success, error, errorMessage, minimumContribution } = this.state;
 
         return(
             <Layout>
@@ -77,7 +77,7 @@ class CreateCampaign extends Component {
                         error
                         icon='remove'
                         header='Hold your horses!'
-                        content={this.state.errorMessage} />
+                        content={errorMessage} />
 
                 </Form>
             </Layout>

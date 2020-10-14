@@ -25,9 +25,12 @@ class IndexCampaign extends Component {
         return (
             <Layout>
                 <Grid centered>
+                    <Grid.Row></Grid.Row>
+                    
                     <Grid.Row>
-                        <h1>Campaigns with greate Ideas!</h1>
+                        <h1>Support the great Ideas!</h1>
                     </Grid.Row>
+
                     <Grid.Row>
                         <Grid.Column floated='right' width={3}>
                             <Link route='campaign-create'>

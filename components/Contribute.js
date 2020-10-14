@@ -21,7 +21,7 @@ class Contribute extends Component {
 
         // TODO: contribution must be at least greater than 0
 
-        this.setState({ loading: true, error: false });
+        this.setState({ loading: true, error: false, errorMessage: '' });
 
         try {
             const campaign = Campaign(campaignAddress);
@@ -51,7 +51,7 @@ class Contribute extends Component {
     }
 
     render = () => {
-        const { loading, success, error, contribution } = this.state;
+        const { loading, success, error, errorMessage, contribution } = this.state;
         const { campaignAddress } = this.props;
 
         return (
@@ -89,7 +89,7 @@ class Contribute extends Component {
                         error
                         icon='remove'
                         header='Hold your horses!'
-                        content={this.state.errorMessage} />
+                        content={errorMessage} />
                 </Form>
             </div>
         );

@@ -15,4 +15,9 @@ module.exports = routes()
         name: 'campaign-spending-requests',
         pattern: '/campaign/:address/requests',
         page: '/campaigns/requests/index'
+    })
+    .add({
+        name: 'campaign-spending-requests-create',
+        pattern: '/campaign/:address/requests/create',
+        page: '/campaigns/requests/create'
     });

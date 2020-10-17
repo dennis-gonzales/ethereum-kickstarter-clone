@@ -9,6 +9,7 @@ import { Link } from '../../routes';
 class CampaignDetails extends Component {
 
     render = () => {
+        const { serverError, httpError } = this.props;
         const {
             minimumContribution,
             balance,
@@ -20,8 +21,12 @@ class CampaignDetails extends Component {
 
         } = this.props;
 
+        if (serverError) {
+            return <h1>Error {httpError}</h1>;
+        }
+
         if (!web3.utils.isAddress(manager)) {
-            return ('Redirecting to previous page.');
+            return ('Invalid link or data doesn\'t exist');
         }
 
         const summary = [
@@ -97,9 +102,18 @@ class CampaignDetails extends Component {
 
 export const getServerSideProps = async (context) => {
     const { address } = context.query;
-    const campaign = Campaign(address);
+    
+    if (!web3.utils.isAddress(address)) {
+        return {
+            props: {
+                serverError: true,
+                httpError: 404
+            },
+        }
+    }
 
     try {
+        const campaign = Campaign(address);
         const summary = await campaign.methods.getSummary().call();
 
         return {

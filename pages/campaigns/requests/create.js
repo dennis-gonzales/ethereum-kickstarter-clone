@@ -47,25 +47,13 @@ class CreateRequest extends Component {
         Router.push('/'); // TODO: takes time. do a loading screen
     }
 
-    saveRecipientOnChange = (e) => {
-        this.setState({
-            recipient: e.target.value,
-            error: false,
-            errorMessage: ''
-        });
-    }
-
     saveValueOnChange = (e) => {
-        this.setState({
-            value: e.target.value,
-            error: false,
-            errorMessage: ''
-        });
-    }
-
-    saveDescriptionOnChange = (e) => {
-        this.setState({
-            description: e.target.value,
+        const target = e.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        
+        this.setState ({
+            [name]: value,
             error: false,
             errorMessage: ''
         });
@@ -102,32 +90,30 @@ class CreateRequest extends Component {
 
                                 <Form.Group>
                                     <Form.Field required>
-                                        <Input action={{
-                                            color: 'orange', labelPosition: 'left',
-                                            icon: 'copy', content: 'Recipient',
-                                        }}
+                                        <Input action={{ color: 'orange', labelPosition: 'left',
+                                            icon: 'copy', content: 'Recipient', }}
+                                            name='recipient'
                                             type='address' placeholder='Enter recipient address'
-                                            value={recipient} onChange={event => this.saveRecipientOnChange(event)} />
+                                            value={recipient} onChange={this.saveValueOnChange} />
 
                                     </Form.Field>
                                 </Form.Group>
 
                                 <Form.Group>
                                     <Form.Field required>
-                                        <Input action={{
-                                            color: 'blue', labelPosition: 'left',
-                                            icon: 'ethereum', content: 'Ether',
-                                        }}
+                                        <Input action={{ color: 'blue', labelPosition: 'left',
+                                            icon: 'ethereum', content: 'Ether', }}
+                                            name='value'
                                             type='number' placeholder='Enter amount to send'
-                                            value={value} onChange={event => this.saveValueOnChange(event)} />
+                                            value={value} onChange={this.saveValueOnChange} />
                                     </Form.Field>
                                 </Form.Group>
 
                                 <Form.Group>
                                     <Form.Field required>
-                                        <Form.TextArea label='Description'
+                                        <Form.TextArea label='Description' name='description'
                                             placeholder='Enter spending description...'
-                                            value={description} onChange={event => this.saveDescriptionOnChange(event)} />
+                                            value={description} onChange={this.saveValueOnChange} />
                                     </Form.Field>
                                 </Form.Group>
 

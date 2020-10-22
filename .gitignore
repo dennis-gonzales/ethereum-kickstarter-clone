@@ -106,6 +106,5 @@ dist
 # TernJS port file
 .tern-port
 
-# ignore package lock file
-package-lock.json
-package-lock.json*
+# Dont ignore ethereum build
+!ethereum/build

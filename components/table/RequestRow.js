@@ -35,8 +35,10 @@ class RequestRow extends Component {
             approversCount
         } = this.props;
 
+        const readyToFinalize = request.approvalCount > approversCount / 2;
+
         return (
-            <Row textAlign='center' disabled={request.complete}>
+            <Row textAlign='center' disabled={request.complete} positive={readyToFinalize && !request.complete} title={readyToFinalize ? 'Spending request is now ready to be finalized' : ''}>
                 <Cell>{id}</Cell>
                 
                 <Cell>{request.description}</Cell>

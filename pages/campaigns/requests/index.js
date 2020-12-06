@@ -13,13 +13,11 @@ class RequestsIndex extends Component {
         const {
             campaignAddress,
             approversCount,
+            requestCount,
             requests,
             serverError,
             httpError
         } = this.props;
-
-        console.log(approversCount);
-        console.log(requests);
 
         if (serverError) {
             return <h1>Error {httpError}</h1>;
@@ -71,6 +69,9 @@ class RequestsIndex extends Component {
                                 {rows}
                             </Table.Body>
                         </Table>
+                        <div>
+                            Found {requestCount} requests.
+                        </div>
                     </Grid.Row>
                 </Grid>
             </Layout>
@@ -105,6 +106,7 @@ export const getServerSideProps = async (context) => {
             props: {
                 campaignAddress: address,
                 approversCount: approversCount,
+                requestCount: requestCount,
                 requests: JSON.parse(JSON.stringify(requests))
             },
         }

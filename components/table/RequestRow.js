@@ -4,6 +4,16 @@ import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
 
 class RequestRow extends Component {
+
+    onApprove = async () => {
+        const campaign = Campaign(this.props.campaignAddress);
+
+        const accounts = await web3.eth.getAccounts();
+        await campaign.methods.approveRequest(this.props.id).send({
+            from: accounts[0]
+        });
+    };
+
     render = () => {
         const {
             Row,
@@ -34,7 +44,7 @@ class RequestRow extends Component {
                 <Cell>{request.approvalCount}/{approversCount}</Cell>
 
                 <Cell>
-                    <Button positive content='Approve' />
+                    <Button positive content='Approve' onClick={this.onApprove} />
                     <Button negative content='Decline' />
                 </Cell>
             </Row>

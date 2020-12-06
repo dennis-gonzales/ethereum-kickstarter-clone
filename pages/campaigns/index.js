@@ -14,7 +14,7 @@ class IndexCampaign extends Component {
             return {
                 header: eachAddress,
                 description: (
-                    <Link route={`/campaigns/${eachAddress}`} as='/campaigns/details'>
+                    <Link route={`/campaigns/${eachAddress}`}>
                         <a>View Campaign</a>
                     </Link>
                 ),

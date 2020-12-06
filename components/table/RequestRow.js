@@ -14,6 +14,15 @@ class RequestRow extends Component {
         });
     };
 
+    onFinalize = async () => {
+        const campaign = Campaign(this.props.campaignAddress);
+
+        const accounts = await web3.eth.getAccounts();
+        await campaign.methods.finalizeRequest(this.props.id).send({
+            from: accounts[0]
+        });
+    };
+
     render = () => {
         const {
             Row,
@@ -23,12 +32,11 @@ class RequestRow extends Component {
         const {
             id,
             request,
-            approversCount,
-            campaignAddress
+            approversCount
         } = this.props;
 
         return (
-            <Row textAlign='center'>
+            <Row textAlign='center' disabled={request.complete}>
                 <Cell>{id}</Cell>
                 
                 <Cell>{request.description}</Cell>
@@ -44,8 +52,8 @@ class RequestRow extends Component {
                 <Cell>{request.approvalCount}/{approversCount}</Cell>
 
                 <Cell>
-                    <Button positive content='Approve' onClick={this.onApprove} />
-                    <Button negative content='Decline' />
+                    <Button positive={!request.complete} content='Approve' onClick={this.onApprove} />
+                    <Button primary={!request.complete} content='Finalize' onClick={this.onFinalize} />
                 </Cell>
             </Row>
         );

@@ -49,13 +49,13 @@ class RequestsIndex extends Component {
                     <Grid.Row>
                         <Link route='campaign-spending-requests-create' params={{ address: campaignAddress }}>
                             <a>
-                                <Button primary content='CREATE SPENDING REQUEST' />
+                                <Button color='teal' content='CREATE SPENDING REQUEST' />
                             </a>
                         </Link>
                     </Grid.Row>
 
                     <Grid.Row>
-                        <Table striped>
+                        <Table striped celled selectable>
                             <Table.Header>
                                 <Table.Row textAlign='center'>
                                     <Table.HeaderCell>Index</Table.HeaderCell>

@@ -23,7 +23,7 @@ class CreateRequest extends Component {
 
         const campaign = Campaign(campaignAddress);
 
-        this.setState({ loading: true, error: false, errorMessage: '' });
+        this.setState({ loading: true, error: false, description: '', errorMessage: '' });
 
         try {
             const accounts = await web3.eth.getAccounts();

@@ -1,26 +1,59 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Dimmer, Loader, Segment } from 'semantic-ui-react';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
 
 class RequestRow extends Component {
 
-    onApprove = async () => {
-        const campaign = Campaign(this.props.campaignAddress);
+    state = {
+        loading: false,
+        success: false,
+        error: false,
+        successMessage: '',
+        errorMessage: ''
+    };
 
-        const accounts = await web3.eth.getAccounts();
-        await campaign.methods.approveRequest(this.props.id).send({
-            from: accounts[0]
-        });
+    onApprove = async () => {
+        this.setState({ loading: true, error: false, successMessage: '', errorMessage: '' });
+
+        try {
+            const campaign = Campaign(this.props.campaignAddress);
+
+            const accounts = await web3.eth.getAccounts();
+            await campaign.methods.approveRequest(this.props.id).send({
+                from: accounts[0]
+            });
+
+            this.setState({ success: true, successMessage: 'Spending request has been successfully approved.' });
+
+        } catch (err) {
+            this.setState({ error: true, errorMessage: err.message });
+        }
+
+        this.setState({ loading: false });
     };
 
     onFinalize = async () => {
-        const campaign = Campaign(this.props.campaignAddress);
+        this.setState({ loading: true, error: false, successMessage: '', errorMessage: '' });
 
-        const accounts = await web3.eth.getAccounts();
-        await campaign.methods.finalizeRequest(this.props.id).send({
-            from: accounts[0]
-        });
+        try {
+            const campaign = Campaign(this.props.campaignAddress);
+
+            const accounts = await web3.eth.getAccounts();
+            await campaign.methods.finalizeRequest(this.props.id).send({
+                from: accounts[0]
+            });
+
+            this.setState({ success: true,
+                successMessage: `Spending request has been successfully finallized\n.
+                Ether amounting to ${web3.utils.fromWei(this.request.value, 'ether')} has been to 
+                ${request.recipient.substr(0, 10)}
+                ...
+                ${request.recipient.substr(32, request.recipient.length)}` });
+
+        } catch (err) {
+            this.setState({ loading: false });
+        }
     };
 
     render = () => {
@@ -32,8 +65,16 @@ class RequestRow extends Component {
         const {
             id,
             request,
-            approversCount
+            approversCount,
         } = this.props;
+
+        const {
+            loading,
+            success,
+            error,
+            successMessage,
+            errorMessage
+        } = this.state;
 
         const readyToFinalize = request.approvalCount > approversCount / 2;
 
@@ -54,9 +95,17 @@ class RequestRow extends Component {
                 <Cell>{request.approvalCount}/{approversCount}</Cell>
 
                 <Cell>
-                    <Button positive={!request.complete} content='Approve' onClick={this.onApprove} />
-                    <Button primary={!request.complete} content='Finalize' onClick={this.onFinalize} />
+
+                    <Segment basic>
+                        <Dimmer active={loading} inverted>
+                            <Loader size='small' content='Loading' />
+                        </Dimmer>
+                        <Button positive={!request.complete} content='Approve' onClick={this.onApprove} />
+                        <Button primary={!request.complete} content='Finalize' onClick={this.onFinalize} />
+                    </Segment>
+                    
                 </Cell>
+
             </Row>
         );
     }

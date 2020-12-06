@@ -1,6 +1,6 @@
 import { Link } from '../../../routes';
 import React, { Component } from 'react';
-import { Table, Button, Grid } from 'semantic-ui-react';
+import { Table, Button, Grid, Segment, Header, Divider, Icon, Search } from 'semantic-ui-react';
 import Layout from '../../../components/Layout';
 import Campaign from '../../../ethereum/campaign';
 import web3 from '../../../ethereum/web3';
@@ -45,14 +45,6 @@ class RequestsIndex extends Component {
                     </Grid.Row>
 
                     <Grid.Row>
-                        <Link route='campaign-spending-requests-create' params={{ address: campaignAddress }}>
-                            <a>
-                                <Button color='teal' content='CREATE SPENDING REQUEST' />
-                            </a>
-                        </Link>
-                    </Grid.Row>
-
-                    <Grid.Row>
                         <Table striped celled selectable>
                             <Table.Header>
                                 <Table.Row textAlign='center'>
@@ -69,11 +61,42 @@ class RequestsIndex extends Component {
                                 {rows}
                             </Table.Body>
                         </Table>
-                        <div>
-                            Found {requestCount} requests.
-                        </div>
                     </Grid.Row>
                 </Grid>
+
+                <Segment placeholder>
+                    <Grid columns={2} stackable textAlign='center'>
+                        <Divider vertical>Or</Divider>
+
+                        <Grid.Row verticalAlign='middle'>
+                            <Grid.Column>
+                            <Header icon>
+                                <Icon name='search' />
+                                Found {requestCount} requests.
+                            </Header>
+
+                            <Link route='campaign-spending-requests-create' params={{ address: campaignAddress }}>
+                                <a>
+                                    <Button color='teal' content='Create Spending Request' />
+                                </a>
+                            </Link>
+
+                            </Grid.Column>
+
+                            <Grid.Column>
+                            <Header icon>
+                                <Icon name='world' />
+                                Create My Own Campaign
+                            </Header>
+                            <Link route='campaign-create'>
+                                <a>
+                                    <Button color='violet' content='Create Campaign' />
+                                </a>
+                            </Link>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Segment>
             </Layout>
         );
     }

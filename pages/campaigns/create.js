@@ -18,7 +18,7 @@ class CreateCampaign extends Component {
     onSubmit = async (event) => {
         const { minimumContribution } = this.state;
         
-        this.setState({ loading: true, error: false, errorMessage: '' });
+        this.setState({ loading: true, success: false, error: false, errorMessage: '' });
 
         try {
             const accounts = await web3.eth.getAccounts();

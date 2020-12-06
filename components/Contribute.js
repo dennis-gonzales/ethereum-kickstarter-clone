@@ -19,9 +19,7 @@ class Contribute extends Component {
 
         const { contribution } = this.state;
 
-        // TODO: contribution must be at least greater than 0
-
-        this.setState({ loading: true, error: false, errorMessage: '' });
+        this.setState({ loading: true, success: false, error: false, errorMessage: '' });
 
         try {
             const campaign = Campaign(campaignAddress);
@@ -45,6 +43,7 @@ class Contribute extends Component {
     saveValueOnChange = (event) => {
         this.setState({
             contribution: event.target.value,
+            success: false,
             error: false,
             errorMessage: ''
         });

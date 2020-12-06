@@ -1,23 +1,9 @@
-const routes = require('next-routes');
+const routes = require('next-routes')();
+    
+routes
+  .add('/campaigns/create', '/campaigns/create')
+  .add('/campaigns/:address', '/campaigns/details')
+  .add('/campaigns/:address/requests', '/campaigns/requests/index')
+  .add('/campaigns/:address/requests/create', '/campaigns/requests/create');
 
-module.exports = routes()
-    .add({
-        name: 'campaign-create',
-        pattern: '/campaign/create',
-        page: '/campaigns/create'
-    })
-    .add({
-        name: 'campaign-details',
-        pattern: '/campaign/:address',
-        page: '/campaigns/details'
-    })
-    .add({
-        name: 'campaign-spending-requests',
-        pattern: '/campaign/:address/requests',
-        page: '/campaigns/requests/index'
-    })
-    .add({
-        name: 'campaign-spending-requests-create',
-        pattern: '/campaign/:address/requests/create',
-        page: '/campaigns/requests/create'
-    });
+  module.exports = routes;

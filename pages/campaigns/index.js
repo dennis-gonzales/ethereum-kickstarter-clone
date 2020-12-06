@@ -14,7 +14,7 @@ class IndexCampaign extends Component {
             return {
                 header: eachAddress,
                 description: (
-                    <Link route='campaign-details' params={{ address: eachAddress }}>
+                    <Link route={`/campaigns/${eachAddress}`}>
                         <a>View Campaign</a>
                     </Link>
                 ),
@@ -33,7 +33,7 @@ class IndexCampaign extends Component {
 
                     <Grid.Row>
                         <Grid.Column floated='right' width={3}>
-                            <Link route='campaign-create'>
+                            <Link route='/campaigns/create'>
                                 <a>
                                     <Button primary icon='add'
                                         content='Create Campaign' />

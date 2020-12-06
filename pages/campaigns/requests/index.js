@@ -75,7 +75,7 @@ class RequestsIndex extends Component {
                                 Found {requestCount} requests.
                             </Header>
 
-                            <Link route='campaign-spending-requests-create' params={{ address: campaignAddress }}>
+                            <Link route={`/campaigns/${campaignAddress}/requests/create`}>
                                 <a>
                                     <Button color='teal' content='Create Spending Request' />
                                 </a>
@@ -88,7 +88,7 @@ class RequestsIndex extends Component {
                                 <Icon name='world' />
                                 Create My Own Campaign
                             </Header>
-                            <Link route='campaign-create'>
+                            <Link route='/campaigns/create'>
                                 <a>
                                     <Button color='violet' content='Create Campaign' />
                                 </a>

@@ -35,6 +35,8 @@ class CreateRequest extends Component {
 
             this.setState({ success: true, recipient: '', value: '', description: '' });
 
+            setTimeout(() => Router.pushRoute(`/campaigns/${campaignAddress}/requests`), 3000);
+
         } catch (err) {
             this.setState({ error: true, errorMessage: err.message });
         }
@@ -43,8 +45,8 @@ class CreateRequest extends Component {
     }
 
     onCancel = (e) => {
-        console.log('Cancelled');
-        Router.push('/'); // TODO: takes time. do a loading screen
+        this.setState({ loading: true });
+        Router.pushRoute(`/campaigns/${this.props.campaignAddress}/requests`);
     }
 
     saveValueOnChange = (e) => {
@@ -133,7 +135,8 @@ class CreateRequest extends Component {
                                             success
                                             icon='check circle outline'
                                             header='Transaction completed'
-                                            content='You have successfuly created a spending request' />
+                                            content='You have successfuly created a spending request
+                                                You will be redirected to your campaign in 3 seconds.'  />
 
                                         <Message
                                             error

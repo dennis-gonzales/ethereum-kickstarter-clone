@@ -7,7 +7,7 @@ class Header extends Component {
     menus = [
         { id: 'menu-home', value: 'Home', route: '/' },
         { id: 'menu-campaigns', value: 'Campaigns', route: '/campaigns' },
-        { id: 'menu-campaign-create', value: '+', route: 'campaign-create' },
+        { id: 'menu-campaigns-create', value: '+', route: '/campaigns/create' },
     ];
 
     render = () => {

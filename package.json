@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "next": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

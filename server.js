@@ -8,8 +8,8 @@ const handler = routes.getRequestHandler(app);
 app.prepare().then(() => {
   const server = express();
   
-  server.use(bodyParser.urlencoded({ extended: true }))
-  server.use(bodyParser.json())
+  server.use(bodyParser.urlencoded({ extended: true }));
+  server.use(bodyParser.json());
   server.use(handler).listen(3000, (err) => {
         if (err) throw err;
         else console.log('started server on http://localhost:3000');

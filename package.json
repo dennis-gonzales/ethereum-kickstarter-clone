@@ -2,10 +2,11 @@
   "name": "kickstarter",
   "version": "1.0.0",
   "description": "A kickstarter clone",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha",
     "dev": "nodemon server.js",
+    "next": "next dev",
     "build": "next build",
     "start": "next start"
   },

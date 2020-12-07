@@ -1,4 +1,3 @@
-import { Router } from '../../routes';
 import React, { Component } from 'react';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import Layout from '../../components/Layout';

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Message, Label, Icon } from 'semantic-ui-react';
-import { Router } from '../routes';
-import Campaign from '../ethereum/campaign';
 import web3 from '../ethereum/web3';
 
 class Contribute extends Component {

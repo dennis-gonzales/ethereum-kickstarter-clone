@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Grid, Form, Input, Message } from 'semantic-ui-react';
-import Layout from '../../../components/Layout';
-import Campaign from '../../../ethereum/campaign';
-import web3 from '../../../ethereum/web3';
+import Layout from '../../../../components/Layout';
+import Campaign from '../../../../ethereum/campaign';
+import web3 from '../../../../ethereum/web3';
+import Link from 'next/link';
 
 class CreateRequest extends Component {
 
@@ -156,7 +157,9 @@ class CreateRequest extends Component {
 }
 
 export const getServerSideProps = async (context) => {
-    const { address } = context.query;
+    const { index } = context.query;
+
+    const address = index;
     
     if (web3.utils.isAddress(address)) {
         return {

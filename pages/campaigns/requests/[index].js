@@ -4,6 +4,7 @@ import Layout from '../../../components/Layout';
 import Campaign from '../../../ethereum/campaign';
 import web3 from '../../../ethereum/web3';
 import RequestRow from '../../../components/table/RequestRow';
+import Link from 'next/link';
 
 class RequestsIndex extends Component {
 
@@ -74,7 +75,7 @@ class RequestsIndex extends Component {
                                 Found {requestCount} requests.
                             </Header>
 
-                            <Link route={`/campaigns/${campaignAddress}/requests/create`}>
+                            <Link href={`/campaigns/requests/create/${campaignAddress}`}>
                                 <a>
                                     <Button color='teal' content='Create Spending Request' />
                                 </a>
@@ -87,7 +88,7 @@ class RequestsIndex extends Component {
                                 <Icon name='world' />
                                 Create My Own Campaign
                             </Header>
-                            <Link route='/campaigns/create'>
+                            <Link href='/campaigns/create'>
                                 <a>
                                     <Button color='violet' content='Create Campaign' />
                                 </a>
@@ -102,7 +103,9 @@ class RequestsIndex extends Component {
 }
 
 export const getServerSideProps = async (context) => {
-    const { address } = context.query;
+    const { index } = context.query;
+
+    const address = index;
 
     if (!web3.utils.isAddress(address)) {
         return {

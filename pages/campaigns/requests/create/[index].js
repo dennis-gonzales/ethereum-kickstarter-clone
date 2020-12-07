@@ -35,8 +35,6 @@ class CreateRequest extends Component {
 
             this.setState({ success: true, recipient: '', value: '', description: '' });
 
-            setTimeout(() => Router.pushRoute(`/campaigns/${campaignAddress}/requests`), 3000);
-
         } catch (err) {
             this.setState({ error: true, errorMessage: err.message });
         }
@@ -44,10 +42,7 @@ class CreateRequest extends Component {
         this.setState({ loading: false });
     }
 
-    onCancel = (e) => {
-        this.setState({ loading: true });
-        Router.pushRoute(`/campaigns/${this.props.campaignAddress}/requests`);
-    }
+    onCancel = (e) => this.setState({ loading: true });
 
     saveValueOnChange = (e) => {
         const target = e.target;
@@ -122,9 +117,11 @@ class CreateRequest extends Component {
                                 <Form.Group>
                                     <Form.Field>
                                         <Button.Group>
-                                            <Button onClick={this.onCancel} negative>Cancel</Button>
+                                            <Link href={`/campaigns/requests/${this.props.campaignAddress}`}>
+                                                <Button onClick={this.onCancel} negative>BACK</Button>
+                                            </Link>
                                             <Button.Or />
-                                            <Button onClick={this.onSubmit} positive>Save</Button>
+                                            <Button onClick={this.onSubmit} positive>SAVE</Button>
                                         </Button.Group>
                                     </Form.Field>
                                 </Form.Group>

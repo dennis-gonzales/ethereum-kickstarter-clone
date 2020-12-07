@@ -26,8 +26,6 @@ class RequestRow extends Component {
 
             this.setState({ success: true, successMessage: 'Spending request has been successfully approved.' });
 
-            Router.pushRoute(`/campaigns/${campaignAddress}/requests`);
-
         } catch (err) {
             this.setState({ error: true, errorMessage: err.message });
         }
@@ -52,8 +50,6 @@ class RequestRow extends Component {
                 ${request.recipient.substr(0, 10)}
                 ...
                 ${request.recipient.substr(32, request.recipient.length)}` });
-
-            Router.pushRoute(`/campaigns/${campaignAddress}/requests`);
 
         } catch (err) {
             this.setState({ loading: false });

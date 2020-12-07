@@ -31,8 +31,6 @@ class Contribute extends Component {
 
             this.setState({ success: true, contribution: '' });
 
-            setTimeout(() => Router.pushRoute(`/campaigns/${campaignAddress}`), 3000);
-
         } catch (err) {
             this.setState({ error: true, errorMessage: err.message });
         }
@@ -82,8 +80,7 @@ class Contribute extends Component {
                         success
                         icon='check circle outline'
                         header='Transaction completed'
-                        content='You have successfuly contributed to this Campaign!
-                            page will reload in 3 seconds...' />
+                        content='You have successfuly contributed to this Campaign!' />
 
                     <Message
                         error

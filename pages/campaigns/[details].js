@@ -78,16 +78,22 @@ class CampaignDetails extends Component {
                     </Grid.Row>
 
                     <Grid.Row>
-                        <Link className='center' href={`/campaigns/requests/${campaignAddress}`}>
-                            <a>
+                        <Button.Group>
+                            <Link href={`/campaigns/requests/${campaignAddress}`}>
                                 <Button primary animated>
                                     <Button.Content visible>VIEW CAMPAIGN EXPENSES</Button.Content>
                                     <Button.Content hidden>
                                         <Icon name='arrow right' />
                                     </Button.Content>
                                 </Button>
-                            </a>
-                        </Link>
+                            </Link>
+                            <Button.Or text='or' />
+                            
+                            <Link  href={`/campaigns/${campaignAddress}`}>
+                                <Button color='teal' content='RELOAD' />
+                            </Link>
+                            
+                        </Button.Group>
                     </Grid.Row>
                 </Grid>
 

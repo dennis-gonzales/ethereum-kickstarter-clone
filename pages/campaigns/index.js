@@ -1,4 +1,4 @@
-import { Link } from '../../routes';
+import Link from 'next/link';
 import React, { Component } from 'react';
 import { Grid, Card, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
@@ -14,7 +14,7 @@ class IndexCampaign extends Component {
             return {
                 header: eachAddress,
                 description: (
-                    <Link route={`/campaigns/${eachAddress}`}>
+                    <Link href={`/campaigns/${eachAddress}`}>
                         <a>View Campaign</a>
                     </Link>
                 ),
@@ -33,7 +33,7 @@ class IndexCampaign extends Component {
 
                     <Grid.Row>
                         <Grid.Column floated='right' width={3}>
-                            <Link route='/campaigns/create'>
+                            <Link href='/campaigns/create'>
                                 <a>
                                     <Button primary icon='add'
                                         content='Create Campaign' />

@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
 import Contribute from '../../components/Contribute';
-import { Link } from '../../routes';
+import Link from 'next/link';
 
 class CampaignDetails extends Component {
 
@@ -78,7 +78,7 @@ class CampaignDetails extends Component {
                     </Grid.Row>
 
                     <Grid.Row>
-                        <Link className='center' route={`/campaigns/${campaignAddress}/requests`}>
+                        <Link className='center' href={`/campaigns/${campaignAddress}/requests`}>
                             <a>
                                 <Button primary animated>
                                     <Button.Content visible>VIEW CAMPAIGN EXPENSES</Button.Content>
@@ -101,7 +101,9 @@ class CampaignDetails extends Component {
 }
 
 export const getServerSideProps = async (context) => {
-    const { address } = context.query;
+    const { details } = context.query;
+
+    const address = details;
     
     if (!web3.utils.isAddress(address)) {
         return {
